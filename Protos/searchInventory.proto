@@ -3,19 +3,22 @@ syntax = "proto3";
 package search;
 
 service InventorySearch{
-    rpc ServerResponse(Message) return {Products}
+    rpc GetServerResponse(Message) returns (Products){}
 }
 
 message Message{
-    string producto = 1;
+    string message = 1;
 }
 
 message Products{
-    repeated Product products = 1;
+    repeated Product product = 1;
 }
 
-message Producto{
-    string name = 1;
-    int32 price = 2;
-    int32 stick = 3;
+message Product{
+
+    int32 id = 1;
+    string name = 2;
+    float price = 3;
+    string category = 4;
+    int32 count = 5;
 }
