@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package search;
+
+service InventorySearch{
+    rpc ServerResponse(Message) return {Products}
+}
+
+message Message{
+    string producto = 1;
+}
+
+message Products{
+    repeated Product products = 1;
+}
+
+message Producto{
+    string name = 1;
+    int32 price = 2;
+    int32 stick = 3;
+}
