@@ -6,7 +6,7 @@ const router=Router()
 const { searchitems,Getitems }=require('../controllers/index.controller')
 
 
-router.post('/search/:name',searchitems)
+router.post('/inventory/search/',searchitems)
 // router.get('/Inventary',Getitems)
 
 module.exports=router;

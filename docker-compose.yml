@@ -37,7 +37,5 @@ services:
     ports:
         - "8031:6379"
     environment:
-      - REDIS_MAXMEMORY=1mb
-      - REDIS_MAXMEMORY_POLICY=allkeys-lru
       - ALLOW_EMPTY_PASSWORD=yes
     command: ["redis-server", "--bind", "redis","--maxmemory 2mb","--maxmemory-policy allkeys-lru"]
