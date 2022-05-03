@@ -6,6 +6,7 @@ services:
     build: ./Client
     depends_on:
       - grpc_server
+      - redis
     ports:
       - "3000:3000"
   
@@ -28,3 +29,15 @@ services:
       - POSTGRESQL_PASSWORD=marihuana
     ports:
       - "5432:5432"
+  
+  redis:
+    container_name: cache
+    image: redis:6.2.6
+    restart: always
+    ports:
+        - "8031:6379"
+    environment:
+      - REDIS_MAXMEMORY=1mb
+      - REDIS_MAXMEMORY_POLICY=allkeys-lru
+      - ALLOW_EMPTY_PASSWORD=yes
+    command: ["redis-server", "--bind", "redis","--maxmemory 2mb","--maxmemory-policy allkeys-lru"]
