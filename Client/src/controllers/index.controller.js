@@ -17,6 +17,7 @@ const redis_client = redis.createClient({
 
 redis_client.on('ready',()=>{
     console.log("Redis listo")
+    console.log("-------------------------------------------------------------------------------------------------------------")
 })
 
 redis_client.connect()
@@ -38,24 +39,43 @@ const searchitems=(req,res)=>{
     let cache = null;
     (async () => {
         let reply = await redis_client.get(busqueda);
-        console.log(reply);
-    
             if(reply){
                 cache = JSON.parse(reply);
-                console.log("Esta en cache :D")
+                console.log("Busqueda: "+busqueda)
+                console.log("Encontrado en Caché!")
+                console.log("Resultados:")
+                var string_total=""
+                for (i in cache['product']){
+                var id=cache['product'][i].id
+                var name=cache['product'][i].name
+                var price=cache['product'].price
+                var category=cache['product'][i].category
+                var count=cache['product'][i].count
+                const stringsumar='id: '+id+' | name:'+name+' | price:'+price+' | category:'+category+' | count:'+count
+                string_total=string_total+stringsumar+'\n'
+                }
+                console.log(string_total)
+                console.log("--------------------------------------------------------------------------------------------------------------------------------")
+
+
                 res.status(200).json(cache)
             }
             else{
-                console.log("No esta en cache D:")
+                console.log("Busqueda: "+busqueda)
+                console.log("No se ha encontrado en Caché, Buscando en Postgres...")
                 client.GetServerResponse({message:busqueda}, (error,items) =>{
                     if(error){
-                        console.log("error aaaa")
+                        
                         res.status(400).json(error);
                     }
                     else{
                         data = JSON.stringify(items)
+                        if (data['product']!==null){
                         redis_client.set(busqueda,data)
-                        res.status(200).json(items);
+                        res.status(200).json(items);}
+                        
+
+                        
             
                     }
                 });
