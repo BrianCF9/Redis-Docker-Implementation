@@ -1,12 +1,3 @@
-# Tarea1_SD 💻
-
-## __Integrantes__
-
->- Rubén Hermosilla
->- Brian Castro
-
-___
-
 ## __Introducción__
 >
 > Este repositorio tiene como objetivo dar a conocer las distintas herramientas que se pueden utilizar al momento de construir un sistema distribuido. En este caso, se implementa un sistema de búsqueda, que consta de 4 módulos que ejecutan las herramientas que permiten la comunicación y ejecución de cada uno de estos contenedores de manera descentralizada. Díchos módulos son:
